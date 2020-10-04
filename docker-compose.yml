@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  app:
+    build: &build
+      context: .
+    environment: 
+      PORT: 3000
+    volumes:
+    - ".env.demo:/srv/.env"
+    ports:
+    - "3000:3000"
+  development:
+    build: *build
+    environment: 
+      PORT: 3000
+    volumes:
+    - ".env.demo:/srv/.env"
+    - ".:/srv/"
+    ports:
+    - "4000:3000"
+    entrypoint: "tail -f /dev/null"
